@@ -1,0 +1,365 @@
+
+/* =========================
+   1. GLOBAL STYLES
+========================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #6c4cf1;
+  --primary-dark: #5035cf;
+  --secondary: #a78bfa;
+  --text: #20213a;
+  --muted: #777b95;
+  --border: #e7e8f1;
+  --white: #ffffff;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Inter', Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at top left, #e8e5ff 0%, transparent 45%),
+    radial-gradient(ellipse at bottom right, #f3e8ff 0%, transparent 40%),
+    #f8f9ff;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =========================
+   2. MAIN CONTAINER
+========================= */
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 45px 20px;
+}
+
+/* =========================
+   3. REGISTER & LOGIN CARDS
+========================= */
+
+.auth-card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 38px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 20px 60px rgba(78, 63, 160, 0.12);
+  animation: appear 0.4s ease;
+}
+
+.auth-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(
+    90deg,
+    #6c4cf1,
+    #a78bfa,
+    #d8b4fe
+  );
+}
+
+.auth-card h1 {
+  margin: 8px 0 12px;
+  text-align: center;
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: #30245f;
+}
+
+.auth-card > p {
+  margin-bottom: 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================
+   4. FORM INPUTS
+========================= */
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-card label {
+  margin-top: 12px;
+  color: #393650;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  outline: none;
+  background: #fafaff;
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.25s, box-shadow 0.25s,
+    background 0.25s;
+}
+
+.auth-card input::placeholder {
+  color: #a3a5b7;
+}
+
+.auth-card input:focus {
+  border-color: var(--primary);
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgba(108, 76, 241, 0.10);
+}
+
+/* =========================
+   5. REGISTER & LOGIN BUTTONS
+========================= */
+
+.auth-card button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #7858f5, #5938d9);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(108, 76, 241, 0.23);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.auth-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(108, 76, 241, 0.30);
+}
+
+.auth-card button:active {
+  transform: scale(0.98);
+}
+
+/* =========================
+   6. REGISTER / LOGIN LINKS
+========================= */
+
+.auth-card a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.auth-card a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.auth-card p:last-child {
+  margin-top: 24px;
+  margin-bottom: 0;
+  font-size: 13px;
+}
+
+/* =========================
+   7. SUCCESS & ERROR MESSAGES
+========================= */
+
+.message {
+  margin: 15px 0 0 !important;
+  padding: 10px 12px;
+  border-radius: 9px;
+  background: #f3f0ff;
+  color: #5942bf;
+  font-size: 13px !important;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   8. PROFILE PAGE
+========================= */
+
+#profilePage {
+  width: 100%;
+  animation: appear 0.4s ease;
+}
+
+.user-profile-card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 36px 27px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  background: var(--white);
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(78, 63, 160, 0.13);
+}
+
+.user-profile-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 115px;
+  background: linear-gradient(135deg, #6c4cf1, #b49aff);
+}
+
+/* Profile avatar */
+
+.user-avatar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 94px;
+  height: 94px;
+  margin: 15px auto 20px;
+  border: 5px solid white;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e8ddff, #d5c7ff);
+  color: #5634d5;
+  font-size: 36px;
+  font-weight: 800;
+  box-shadow: 0 5px 20px rgba(45, 30, 100, 0.15);
+}
+
+/* Profile email heading */
+
+.user-profile-card h2 {
+  margin: 10px 0;
+  color: #30245f;
+  font-size: 19px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.user-profile-card h3 {
+  margin: 25px 0 15px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--border);
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* Profile details */
+
+.user-profile-card p {
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid #eeecfa;
+  border-radius: 12px;
+  background: #faf9ff;
+  color: #48445e;
+  font-size: 13px;
+  line-height: 1.8;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   9. LOGOUT BUTTON
+========================= */
+
+#logoutButton {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 18px;
+  border: 1px solid #f5d0d0;
+  border-radius: 12px;
+  background: #fff1f2;
+  color: #c62843;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.2s, transform 0.2s;
+}
+
+#logoutButton:hover {
+  transform: translateY(-2px);
+  background: #ffe0e5;
+}
+
+/* =========================
+   10. ANIMATION
+========================= */
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   11. TABLET & MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .container {
+    padding: 28px 16px;
+  }
+
+  .auth-card {
+    padding: 32px 22px;
+    border-radius: 20px;
+  }
+
+  .auth-card h1 {
+    font-size: 25px;
+  }
+
+  .user-profile-card {
+    padding: 30px 19px 23px;
+    border-radius: 20px;
+  }
+
+  .user-profile-card h2 {
+    font-size: 16px;
+  }
+
+  .user-avatar {
+    width: 86px;
+    height: 86px;
+    font-size: 32px;
+  }
+}

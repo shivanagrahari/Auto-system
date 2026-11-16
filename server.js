@@ -10,11 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-
-// Home route
-app.get("/", (req, res) => {
-  res.send("Auth System Server is Running!");
-});
+app.use(express.static("public"));
 
 // Authentication routes
 app.use("/api/auth", authRoutes);
