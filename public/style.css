@@ -1,9 +1,9 @@
 
-/* =========================
-   1. GLOBAL STYLES
-========================= */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ==================================
+   GLOBAL
+================================== */
 
 * {
   margin: 0;
@@ -12,354 +12,775 @@
 }
 
 :root {
-  --primary: #6c4cf1;
-  --primary-dark: #5035cf;
-  --secondary: #a78bfa;
-  --text: #20213a;
-  --muted: #777b95;
-  --border: #e7e8f1;
+  --purple: #8055e8;
+  --pink: #e8b4e7;
   --white: #ffffff;
+  --text: #29204f;
 }
 
 body {
+  font-family: 'Inter', sans-serif;
   min-height: 100vh;
-  font-family: 'Inter', Arial, sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(ellipse at top left, #e8e5ff 0%, transparent 45%),
-    radial-gradient(ellipse at bottom right, #f3e8ff 0%, transparent 40%),
-    #f8f9ff;
+  background: #f7f6fc;
 }
 
-button,
-input {
-  font: inherit;
+button, input, textarea {
+  font-family: inherit;
 }
 
 button {
   cursor: pointer;
+  transition: 0.3s ease;
 }
 
 .hidden {
   display: none !important;
 }
 
-/* =========================
-   2. MAIN CONTAINER
-========================= */
+/* ==================================
+   MAIN CONTAINER
+================================== */
 
 .container {
   width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 45px 20px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
 }
 
-/* =========================
-   3. REGISTER & LOGIN CARDS
-========================= */
+/* ==================================
+   LOGIN / REGISTER BACKGROUND
+================================== */
+
+.container:has(#loginPage:not(.hidden)),
+.container:has(#registerPage:not(.hidden)) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 80% 25%, #70476e 0%, transparent 42%),
+    radial-gradient(ellipse at 20% 85%, #32124e 0%, transparent 45%),
+    linear-gradient(135deg, #160d27, #38203f 55%, #754c70);
+}
+
+/* PINK CIRCLE */
+
+.container:has(#loginPage:not(.hidden))::before,
+.container:has(#registerPage:not(.hidden))::before {
+  content: "";
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  top: 14%;
+  right: 17%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffd0c8, #f19c9e 55%, #a54d70);
+  box-shadow: 0 0 80px rgba(255, 158, 185, 0.25);
+  z-index: 0;
+}
+
+/* PURPLE CIRCLE */
+
+.container:has(#loginPage:not(.hidden))::after,
+.container:has(#registerPage:not(.hidden))::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  bottom: 5%;
+  left: 15%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e0b9ff, #9b61e9 55%, #5425a0);
+  box-shadow: 0 0 90px rgba(167, 110, 255, 0.3);
+  z-index: 0;
+}
+
+/* ==================================
+   AUTH CARD
+================================== */
 
 .auth-card {
   position: relative;
-  overflow: hidden;
+  z-index: 1;
   width: 100%;
-  padding: 38px 32px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 20px 60px rgba(78, 63, 160, 0.12);
-  animation: appear 0.4s ease;
+  max-width: 450px;
+  padding: 48px 38px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.075);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  animation: appear 0.6s ease;
 }
 
 .auth-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background: linear-gradient(
-    90deg,
-    #6c4cf1,
-    #a78bfa,
-    #d8b4fe
-  );
+  display: none;
 }
 
 .auth-card h1 {
-  margin: 8px 0 12px;
-  text-align: center;
-  font-size: 29px;
+  color: white;
+  font-size: 32px;
   font-weight: 800;
-  letter-spacing: -0.8px;
-  color: #30245f;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 .auth-card > p {
-  margin-bottom: 24px;
+  color: #d7c7dd;
   text-align: center;
-  color: var(--muted);
   font-size: 14px;
-  line-height: 1.7;
+  margin-bottom: 25px;
+  line-height: 1.6;
 }
-
-/* =========================
-   4. FORM INPUTS
-========================= */
 
 .auth-card form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .auth-card label {
-  margin-top: 12px;
-  color: #393650;
+  color: #f3eaf5;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
+  margin-top: 8px;
 }
 
 .auth-card input {
   width: 100%;
-  padding: 14px 15px;
-  border: 1px solid var(--border);
-  border-radius: 11px;
-  outline: none;
-  background: #fafaff;
-  color: var(--text);
+  padding: 15px 16px;
+  color: white;
+  background: rgba(35, 18, 48, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: 12px;
   font-size: 14px;
-  transition: border-color 0.25s, box-shadow 0.25s,
-    background 0.25s;
+  outline: none;
+  transition: 0.3s ease;
 }
 
 .auth-card input::placeholder {
-  color: #a3a5b7;
+  color: #c6b2ca;
 }
 
 .auth-card input:focus {
-  border-color: var(--primary);
-  background: var(--white);
-  box-shadow: 0 0 0 4px rgba(108, 76, 241, 0.10);
+  background: rgba(35, 18, 48, 0.65);
+  border-color: #e4a6e7;
+  box-shadow: 0 0 0 4px rgba(224, 155, 232, 0.12);
 }
-
-/* =========================
-   5. REGISTER & LOGIN BUTTONS
-========================= */
 
 .auth-card button {
   width: 100%;
-  margin-top: 18px;
-  padding: 14px 18px;
+  margin-top: 17px;
+  padding: 16px;
   border: none;
-  border-radius: 11px;
-  background: linear-gradient(135deg, #7858f5, #5938d9);
-  color: var(--white);
-  font-size: 14px;
-  font-weight: 700;
-  box-shadow: 0 8px 18px rgba(108, 76, 241, 0.23);
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e8b4e7, #c48acb);
+  color: #29152f;
+  font-size: 15px;
+  font-weight: 800;
+  box-shadow: 0 8px 25px rgba(225, 155, 224, 0.2);
 }
 
 .auth-card button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(108, 76, 241, 0.30);
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #f4c8ef, #d9a0e0);
+  box-shadow: 0 12px 30px rgba(225, 155, 224, 0.3);
 }
-
-.auth-card button:active {
-  transform: scale(0.98);
-}
-
-/* =========================
-   6. REGISTER / LOGIN LINKS
-========================= */
 
 .auth-card a {
-  color: var(--primary);
+  color: #e8b1ed;
   font-weight: 700;
   text-decoration: none;
-  transition: color 0.2s;
 }
 
 .auth-card a:hover {
-  color: var(--primary-dark);
+  color: white;
   text-decoration: underline;
 }
 
 .auth-card p:last-child {
-  margin-top: 24px;
+  margin-top: 20px;
   margin-bottom: 0;
   font-size: 13px;
 }
 
-/* =========================
-   7. SUCCESS & ERROR MESSAGES
-========================= */
-
-.message {
-  margin: 15px 0 0 !important;
-  padding: 10px 12px;
-  border-radius: 9px;
-  background: #f3f0ff;
-  color: #5942bf;
-  font-size: 13px !important;
-  overflow-wrap: anywhere;
+.auth-card .message {
+  color: #f3c3f1;
+  line-height: 1.6;
 }
 
-/* =========================
-   8. PROFILE PAGE
-========================= */
-
-#profilePage {
-  width: 100%;
-  animation: appear 0.4s ease;
-}
-
-.user-profile-card {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  padding: 36px 27px 28px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 24px;
-  background: var(--white);
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(78, 63, 160, 0.13);
-}
-
-.user-profile-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 115px;
-  background: linear-gradient(135deg, #6c4cf1, #b49aff);
-}
-
-/* Profile avatar */
-
-.user-avatar {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 94px;
-  height: 94px;
-  margin: 15px auto 20px;
-  border: 5px solid white;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #e8ddff, #d5c7ff);
-  color: #5634d5;
-  font-size: 36px;
-  font-weight: 800;
-  box-shadow: 0 5px 20px rgba(45, 30, 100, 0.15);
-}
-
-/* Profile email heading */
-
-.user-profile-card h2 {
-  margin: 10px 0;
-  color: #30245f;
-  font-size: 19px;
-  font-weight: 800;
-  overflow-wrap: anywhere;
-}
-
-.user-profile-card h3 {
-  margin: 25px 0 15px;
-  padding-bottom: 13px;
-  border-bottom: 1px solid var(--border);
-  color: var(--primary);
-  font-size: 16px;
-  font-weight: 700;
-}
-
-/* Profile details */
-
-.user-profile-card p {
-  margin-top: 12px;
-  padding: 14px;
-  border: 1px solid #eeecfa;
-  border-radius: 12px;
-  background: #faf9ff;
-  color: #48445e;
-  font-size: 13px;
-  line-height: 1.8;
-  text-align: left;
-  overflow-wrap: anywhere;
-}
-
-/* =========================
-   9. LOGOUT BUTTON
-========================= */
-
-#logoutButton {
-  display: block;
-  width: 100%;
-  margin-top: 20px;
-  padding: 14px 18px;
-  border: 1px solid #f5d0d0;
-  border-radius: 12px;
-  background: #fff1f2;
-  color: #c62843;
-  font-size: 14px;
-  font-weight: 700;
-  transition: background 0.2s, transform 0.2s;
-}
-
-#logoutButton:hover {
-  transform: translateY(-2px);
-  background: #ffe0e5;
-}
-
-/* =========================
-   10. ANIMATION
-========================= */
+/* ==================================
+   ANIMATION
+================================== */
 
 @keyframes appear {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* =========================
-   11. TABLET & MOBILE
-========================= */
+/* ==================================
+   DASHBOARD LAYOUT
+================================== */
+
+.container:has(#profilePage:not(.hidden)) {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* Dashboard Background */
+
+#profilePage.dashboard-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 85% 10%, #67436f 0%, transparent 40%),
+    radial-gradient(ellipse at 20% 90%, #32164d 0%, transparent 45%),
+    linear-gradient(135deg, #160d27, #38203f 55%, #593b65);
+  color: white;
+}
+
+/* ==================================
+   DASHBOARD PINK CIRCLE
+================================== */
+
+#profilePage.dashboard-layout::before {
+  content: "";
+  position: fixed;
+  width: 210px;
+  height: 210px;
+  top: 14%;
+  right: 17%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #ffd0c8,
+    #f19c9e 55%,
+    #a54d70
+  );
+  box-shadow: 0 0 80px rgba(255, 158, 185, 0.25);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ==================================
+   DASHBOARD PURPLE CIRCLE
+================================== */
+
+#profilePage.dashboard-layout::after {
+  content: "";
+  position: fixed;
+  width: 260px;
+  height: 260px;
+  bottom: 5%;
+  left: 15%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    #e0b9ff,
+    #9b61e9 55%,
+    #5425a0
+  );
+  box-shadow: 0 0 90px rgba(167, 110, 255, 0.3);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ==================================
+   SIDEBAR
+================================== */
+
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  min-height: 100vh;
+  padding: 30px 18px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  background: rgba(20, 10, 38, 0.65);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-right: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 10px 0 40px rgba(0,0,0,0.12);
+}
+
+.sidebar-brand {
+  padding: 5px 12px 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+}
+
+.sidebar-brand h2 {
+  color: white;
+  font-size: 25px;
+  font-weight: 800;
+  margin-bottom: 7px;
+}
+
+.sidebar-brand p {
+  color: #d5b9e8;
+  font-size: 12px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 30px;
+}
+
+.nav-link {
+  color: #ddcde9;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: rgba(222, 173, 255, 0.16);
+  border-color: rgba(231, 192, 255, 0.20);
+  color: white;
+}
+
+.sidebar-logout {
+  margin-top: auto;
+  padding: 13px;
+  border-radius: 12px;
+  color: white;
+  background: rgba(255,255,255,0.09);
+  border: 1px solid rgba(255,255,255,0.22);
+  font-weight: 600;
+}
+
+.sidebar-logout:hover {
+  background: rgba(220,53,69,0.75);
+}
+
+/* ==================================
+   DASHBOARD CONTENT
+================================== */
+
+.dashboard-content {
+  flex: 1;
+  width: calc(100% - 260px);
+  min-width: 0;
+  padding: 45px;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: appear 0.35s ease;
+}
+
+.page-heading {
+  margin-bottom: 30px;
+}
+
+.page-heading h1 {
+  color: white;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 9px;
+}
+
+.page-heading p {
+  color: #d1bfdc;
+  font-size: 14px;
+}
+
+/* ==================================
+   GLASS CARDS
+================================== */
+
+.email-dashboard,
+.email-compose,
+.voice-assistant {
+  width: 100%;
+  padding: 28px;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.075);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 20px;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.15),
+    inset 0 1px 1px rgba(255,255,255,0.08);
+  color: white;
+}
+
+.email-dashboard h2,
+.voice-assistant h2 {
+  color: white;
+  font-size: 21px;
+  margin-bottom: 12px;
+}
+
+.email-dashboard > p,
+.voice-assistant > p {
+  color: #d6c5df;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* ==================================
+   PROFILE CARD
+================================== */
+
+.user-profile-card {
+  padding: 30px;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
+  color: white;
+  background: rgba(255,255,255,0.11);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255,255,255,0.23);
+  border-radius: 20px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+}
+
+.user-profile-card h2 {
+  font-size: 20px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+
+.user-profile-card h3 {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.user-profile-card p {
+  font-size: 13px;
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+}
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #edb9ec, #a978d8);
+  color: #351b48;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+/* ==================================
+   COMPOSE FORM
+================================== */
+
+.email-compose form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.email-compose label {
+  color: #f4e8fa;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 7px;
+}
+
+.email-compose input,
+.email-compose textarea {
+  width: 100%;
+  padding: 14px 16px;
+  color: white;
+  background: rgba(30,15,43,0.55);
+  border: 1px solid rgba(255,255,255,0.19);
+  border-radius: 12px;
+  outline: none;
+  font-size: 14px;
+  transition: 0.25s ease;
+}
+
+.email-compose input::placeholder,
+.email-compose textarea::placeholder {
+  color: #c7b3d0;
+}
+
+.email-compose input:focus,
+.email-compose textarea:focus {
+  border-color: #d9a6e8;
+  box-shadow: 0 0 0 4px rgba(217,166,232,0.12);
+}
+
+.email-compose textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.email-compose button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 15px;
+  border: none;
+  border-radius: 11px;
+  color: #29152f;
+  font-size: 15px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e8b4e7, #bd82d0);
+  box-shadow: 0 8px 18px rgba(225,155,224,0.22);
+}
+
+.email-compose button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(225,155,224,0.30);
+}
+
+/* ==================================
+   GENERAL DASHBOARD BUTTONS
+================================== */
+
+.email-dashboard > button,
+.voice-controls button,
+.email-card button {
+  background: linear-gradient(135deg, #e8b4e7, #bd82d0);
+  color: #29152f;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  margin: 5px;
+}
+
+.email-dashboard > button:hover,
+.voice-controls button:hover,
+.email-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(225,155,224,0.2);
+}
+
+/* ==================================
+   EMAIL CARDS
+================================== */
+
+.email-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 16px;
+  transition: 0.25s ease;
+  color: white;
+}
+
+.email-card:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(224,173,240,0.45);
+  transform: translateY(-2px);
+}
+
+.email-card h3 {
+  font-size: 17px;
+  color: white;
+  margin-bottom: 12px;
+  overflow-wrap: anywhere;
+}
+
+.email-card p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #d8c6e2;
+  margin: 7px 0;
+  overflow-wrap: anywhere;
+}
+
+.email-card .delete-button {
+  background: #d94a67;
+  color: white;
+}
+
+.email-card .delete-button:hover {
+  background: #b02a37;
+}
+
+/* ==================================
+   VOICE ASSISTANT
+================================== */
+
+.voice-assistant {
+  text-align: center;
+  padding: 45px 25px;
+}
+
+.voice-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 25px 0;
+}
+
+.voice-controls button {
+  min-width: 90px;
+  padding: 13px 20px;
+}
+
+.voice-status {
+  background: rgba(220,175,255,0.13);
+  color: #f0cafa !important;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* ==================================
+   RESPONSIVE TABLET
+================================== */
+
+@media (max-width: 768px) {
+
+  .auth-card {
+    max-width: 420px;
+    padding: 38px 25px;
+  }
+
+  #profilePage.dashboard-layout {
+    flex-direction: column;
+  }
+
+  #profilePage .sidebar {
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+    padding: 18px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  #profilePage .sidebar-brand {
+    padding-bottom: 15px;
+  }
+
+  #profilePage .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    margin-top: 15px;
+    padding-bottom: 8px;
+  }
+
+  #profilePage .nav-link {
+    white-space: nowrap;
+    font-size: 12px;
+    padding: 11px;
+  }
+
+  #profilePage .sidebar-logout {
+    margin-top: 15px;
+  }
+
+  #profilePage .dashboard-content {
+    width: 100%;
+    padding: 22px 16px;
+  }
+
+  #profilePage .page-heading h1 {
+    font-size: 26px;
+  }
+}
+
+/* ==================================
+   MOBILE
+================================== */
 
 @media (max-width: 600px) {
-  .container {
-    padding: 28px 16px;
+
+  .container:has(#loginPage:not(.hidden)),
+  .container:has(#registerPage:not(.hidden)) {
+    padding: 20px;
   }
 
   .auth-card {
-    padding: 32px 22px;
-    border-radius: 20px;
+    padding: 35px 22px;
+    border-radius: 22px;
   }
 
   .auth-card h1 {
-    font-size: 25px;
+    font-size: 26px;
   }
 
-  .user-profile-card {
-    padding: 30px 19px 23px;
-    border-radius: 20px;
+  .container:has(#loginPage:not(.hidden))::before,
+  .container:has(#registerPage:not(.hidden))::before {
+    width: 120px;
+    height: 120px;
+    right: 2%;
   }
 
-  .user-profile-card h2 {
-    font-size: 16px;
+  .container:has(#loginPage:not(.hidden))::after,
+  .container:has(#registerPage:not(.hidden))::after {
+    width: 150px;
+    height: 150px;
+    left: 0;
   }
 
-  .user-avatar {
-    width: 86px;
-    height: 86px;
-    font-size: 32px;
+  #profilePage.dashboard-layout::before {
+    width: 140px;
+    height: 140px;
+    right: 0;
+  }
+
+  #profilePage.dashboard-layout::after {
+    width: 160px;
+    height: 160px;
+    left: 0;
+  }
+
+  #profilePage .dashboard-content {
+    padding: 18px 12px;
+  }
+
+  #profilePage .email-dashboard,
+  #profilePage .email-compose,
+  #profilePage .voice-assistant {
+    padding: 18px;
+  }
+
+  #profilePage .email-card {
+    padding: 15px;
+  }
+
+  #profilePage .page-heading h1 {
+    font-size: 24px;
   }
 }

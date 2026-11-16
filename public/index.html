@@ -1,15 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto System | Smart Mail Assistant</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+
+  <!-- AUTH CONTAINER -->
   <main class="container">
 
-    <!-- REGISTER PAGE -->
+    <!-- REGISTER -->
     <section id="registerPage" class="auth-card">
       <h1>Create Account</h1>
       <p>Register to get started</p>
@@ -19,18 +22,16 @@
         <input id="registerEmail" type="email" placeholder="Enter your email" required>
 
         <label for="registerPassword">Password</label>
-        <input id="registerPassword" type="password" placeholder="Enter password" required minlength="6">
+        <input id="registerPassword" type="password" placeholder="Enter password" required minlength="8">
 
         <button type="submit">Register</button>
       </form>
 
       <p id="registerMessage" class="message"></p>
-      <p>Already have an account?
-        <a href="#" id="showLogin">Login</a>
-      </p>
+      <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
     </section>
 
-    <!-- LOGIN PAGE -->
+    <!-- LOGIN -->
     <section id="loginPage" class="auth-card hidden">
       <h1>Welcome Back</h1>
       <p>Login to your account</p>
@@ -46,20 +47,134 @@
       </form>
 
       <p id="loginMessage" class="message"></p>
-      <p>Don't have an account?
-        <a href="#" id="showRegister">Register</a>
-      </p>
+      <p>Don't have an account? <a href="#" id="showRegister">Register</a></p>
     </section>
 
-    <!-- PROFILE PAGE -->
-    <section id="profilePage" class="hidden">
-      <div id="profileResult"></div>
-      <button id="logoutButton" type="button">Logout</button>
-    </section>
+    <!-- MAIN DASHBOARD -->
+    <section id="profilePage" class="hidden dashboard-layout">
 
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <h2>Auto System</h2>
+          <p>Smart Mail Assistant</p>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button class="nav-link active" data-page="homeSection">🏠 Home</button>
+          <button class="nav-link" data-page="composeSection">✉️ Compose Email</button>
+          <button class="nav-link" data-page="inboxSection">📥 Inbox</button>
+          <button class="nav-link" data-page="sentSection">📤 Sent Emails</button>
+          <button class="nav-link" data-page="voiceSection">🔊 Voice Assistant</button>
+        </nav>
+
+        <button id="logoutButton" class="sidebar-logout" type="button">
+          Logout
+        </button>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <div class="dashboard-content">
+
+        <!-- HOME -->
+        <section id="homeSection" class="dashboard-page">
+          <div class="page-heading">
+            <h1>Welcome to Dashboard</h1>
+            <p>Manage your emails easily.</p>
+          </div>
+
+          <div id="profileResult"></div>
+
+          <div class="email-dashboard">
+            <h2>Smart Mail Assistant</h2>
+            <p>Use the sidebar to compose, read and manage your emails.</p>
+          </div>
+        </section>
+
+        <!-- COMPOSE -->
+        <section id="composeSection" class="dashboard-page hidden">
+          <div class="page-heading">
+            <h1>Compose Email</h1>
+            <p>Write and send your message.</p>
+          </div>
+
+          <div class="email-compose">
+            <form id="composeForm">
+              <label for="receiverEmail">Receiver Email</label>
+              <input id="receiverEmail" type="email" placeholder="Enter registered user's email" required>
+
+              <label for="emailSubject">Subject</label>
+              <input id="emailSubject" type="text" placeholder="Enter subject" required>
+
+              <label for="emailMessage">Message</label>
+              <textarea id="emailMessage" placeholder="Write your message..." required></textarea>
+
+              <button type="submit">Send Email</button>
+            </form>
+
+            <p id="sendMessage" class="message"></p>
+          </div>
+        </section>
+
+        <!-- INBOX -->
+        <section id="inboxSection" class="dashboard-page hidden">
+          <div class="page-heading">
+            <h1>Inbox</h1>
+            <p>Your received emails.</p>
+          </div>
+
+          <div class="email-dashboard">
+            <button id="loadInboxButton" type="button">Refresh Inbox</button>
+            <div id="inboxList">
+              <p>Your inbox will appear here.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SENT -->
+        <section id="sentSection" class="dashboard-page hidden">
+          <div class="page-heading">
+            <h1>Sent Emails</h1>
+            <p>Messages you have sent.</p>
+          </div>
+
+          <div class="email-dashboard">
+            <button id="loadSentButton" type="button">Refresh Sent</button>
+            <div id="sentList">
+              <p>Your sent emails will appear here.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- VOICE -->
+        <section id="voiceSection" class="dashboard-page hidden">
+          <div class="page-heading">
+            <h1>Voice Assistant</h1>
+            <p>Listen to your emails.</p>
+          </div>
+
+          <div class="voice-assistant">
+            <h2>Email Voice Reader</h2>
+            <p>Select Read Aloud on an email, then use these controls.</p>
+
+            <div class="voice-controls">
+              <button id="playVoiceButton" type="button">Play</button>
+              <button id="pauseVoiceButton" type="button">Pause</button>
+              <button id="stopVoiceButton" type="button">Stop</button>
+            </div>
+
+            <p id="voiceStatus" class="voice-status">
+              Select an email and click Play.
+            </p>
+          </div>
+        </section>
+
+      </div>
+    </section>
   </main>
 
+  <script src="/socket.io/socket.io.js"></script>
   <script src="/script.js"></script>
-    
+
 </body>
 </html>
